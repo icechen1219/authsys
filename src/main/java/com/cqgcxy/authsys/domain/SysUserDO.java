@@ -2,6 +2,7 @@ package com.cqgcxy.authsys.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * sys_user
@@ -71,6 +72,8 @@ public class SysUserDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    private List<SysRoleDO> roleList;
 
     private static final long serialVersionUID = 1L;
 
@@ -184,6 +187,14 @@ public class SysUserDO implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<SysRoleDO> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<SysRoleDO> roleList) {
+        this.roleList = roleList;
     }
 
     @Override

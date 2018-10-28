@@ -1,5 +1,6 @@
 package com.cqgcxy.authsys.web;
 
+import com.cqgcxy.authsys.domain.SysRoleDO;
 import com.cqgcxy.authsys.domain.SysUserDO;
 import com.cqgcxy.authsys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class UserManagerController {
         System.err.println(loginVo);
         if(loginVo!=null) {
             session.setAttribute("loginUser", loginVo);
+            System.err.println("你拥有以下角色：");
+            for (SysRoleDO tmpRole : loginVo.getRoleList()) {
+                System.err.println(tmpRole);
+            }
             return "admin";
         }else{
             return "error";

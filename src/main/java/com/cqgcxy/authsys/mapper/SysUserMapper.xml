@@ -16,6 +16,12 @@
         <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+
+        <collection property="roleList" ofType="com.cqgcxy.authsys.domain.SysRoleDO">
+            <id column="role_id" jdbcType="INTEGER" property="roleId" />
+            <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+            <result column="status" jdbcType="INTEGER" property="status" />
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
     user_id, username, `password`, real_name, idcard_no, sex, email, phone, `status`,
@@ -198,16 +204,29 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
     <!-- 以下是开发人员自定义方法 -->
-    <select id="findByUserNameAndPwd" parameterType="com.cqgcxy.authsys.domain.SysUserDO" resultMap="BaseResultMap">
+    <!--select id="findByUserNameAndPwd" parameterType="com.cqgcxy.authsys.domain.SysUserDO" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from sys_user
         where username=#{username, jdbcType=VARCHAR}
         and password=#{password, jdbcType=VARCHAR}
-    </select>
+    </select-->
     <update id="updateLoginTime" parameterType="java.lang.Integer">
         update sys_user
         set login_time = now()
         where user_id = #{userId,jdbcType=INTEGER}
     </update>
+    <select id="findByUserNameAndPwd" parameterType="com.cqgcxy.authsys.domain.SysUserDO" resultMap="BaseResultMap">
+        select
+            u.*,
+            r.role_id,
+            r.role_name,
+            r.STATUS 
+        from
+            sys_user u
+            left join user_role ur on u.user_id = ur.user_id
+            left join sys_role r on r.role_id = ur.role_id
+        where username=#{username, jdbcType=VARCHAR}
+        and password=#{password, jdbcType=VARCHAR}
+    </select>
 </mapper>
