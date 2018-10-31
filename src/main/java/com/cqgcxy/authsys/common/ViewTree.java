@@ -22,7 +22,7 @@ public class ViewTree {
     private String iconCls;
     private boolean checked;
     private String state;
-    private Object attributes;
+    private MenuAttribute attributes;
     private List<ViewTree> children;
 
 
@@ -66,12 +66,15 @@ public class ViewTree {
         this.state = state;
     }
 
-    public Object getAttributes() {
+    public MenuAttribute getAttributes() {
         return attributes;
     }
 
-    public void setAttributes(Object attributes) {
+    public void setAttributes(MenuAttribute attributes) {
         this.attributes = attributes;
+        if(attributes.getIsLeaf()==0){
+            setState("closed");
+        }
     }
 
     public List<ViewTree> getChildren() {

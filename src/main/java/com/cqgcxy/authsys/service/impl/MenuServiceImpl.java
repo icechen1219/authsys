@@ -23,6 +23,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<SysMenuDO> findByParentId(Integer id) {
+        return sysMenuDao.findByParentId(id);
+    }
+
+    @Override
     public SysMenuDO findById(Integer menuId) {
         return sysMenuDao.findById(menuId);
     }

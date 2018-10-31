@@ -10,5 +10,9 @@ import java.util.List;
  */
 public interface MenuService {
     List<SysMenuDO> findAll();
+
+    List<SysMenuDO> findByParentId(Integer id);
+
     SysMenuDO findById(Integer menuId);
+
 }

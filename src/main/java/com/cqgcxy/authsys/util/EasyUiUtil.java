@@ -4,19 +4,19 @@ import com.cqgcxy.authsys.common.MenuAttribute;
 import com.cqgcxy.authsys.common.ViewTree;
 import com.cqgcxy.authsys.domain.SysMenuDO;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author icechen1219
  * @date 2018/10/29
  */
 public class EasyUiUtil {
-    public static List<ViewTree> buildTreeData(List<SysMenuDO> menuList) {
+    public static List<ViewTree> buildTreeData(List<SysMenuDO> menuList, Integer parentId) {
         List<ViewTree> list = new ArrayList<>();
         for (SysMenuDO tmp : menuList) {
-            if (tmp.getParentId() == null) {
+            if (Objects.equals(tmp.getParentId(), parentId)) {
                 ViewTree m1 = new ViewTree();
                 convert2EasyUiTreeData(tmp, m1);
                 list.add(m1);
@@ -40,9 +40,9 @@ public class EasyUiUtil {
         menu1.setId(sysMenu.getMenuId());
         menu1.setText(sysMenu.getMenuName());
         menu1.setIconCls(sysMenu.getIcon());
-        MenuAttribute attributes=new MenuAttribute();
+        MenuAttribute attributes = new MenuAttribute();
         try {
-            ReflectionUtil.simpleClonePojo(sysMenu,attributes);
+            ReflectionUtil.simpleClonePojo(sysMenu, attributes);
         } catch (Exception e) {
             e.printStackTrace();
         }
