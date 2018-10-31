@@ -1,0 +1,99 @@
+[
+  {
+    "id": 1,
+    "text": "系统管理",
+    "iconCls": null,
+    "checked": false,
+    "state": null,
+    "attributes": {
+      "menuId": 1,
+      "menuName": "系统管理",
+      "parentId": null,
+      "url": null,
+      "icon": null,
+      "sortCode": 0,
+      "status": 0,
+      "remark": null,
+      "isLeaf": 0
+    },
+    "children": [
+      {
+        "id": 2,
+        "text": "用户管理",
+        "iconCls": null,
+        "checked": false,
+        "state": null,
+        "attributes": {
+          "menuId": 2,
+          "menuName": "用户管理",
+          "parentId": 1,
+          "url": null,
+          "icon": null,
+          "sortCode": 1,
+          "status": 0,
+          "remark": null,
+          "isLeaf": 0
+        },
+        "children": [
+          {
+            "id": 4,
+            "text": "密码管理",
+            "iconCls": null,
+            "checked": false,
+            "state": null,
+            "attributes": {
+              "menuId": 4,
+              "menuName": "密码管理",
+              "parentId": 2,
+              "url": null,
+              "icon": null,
+              "sortCode": 1,
+              "status": 0,
+              "remark": null,
+              "isLeaf": 1
+            },
+            "children": null
+          },
+          {
+            "id": 5,
+            "text": "个人信息",
+            "iconCls": null,
+            "checked": false,
+            "state": null,
+            "attributes": {
+              "menuId": 5,
+              "menuName": "个人信息",
+              "parentId": 2,
+              "url": null,
+              "icon": null,
+              "sortCode": 2,
+              "status": 0,
+              "remark": null,
+              "isLeaf": 1
+            },
+            "children": null
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "text": "角色管理",
+        "iconCls": null,
+        "checked": false,
+        "state": null,
+        "attributes": {
+          "menuId": 3,
+          "menuName": "角色管理",
+          "parentId": 1,
+          "url": null,
+          "icon": null,
+          "sortCode": 2,
+          "status": 0,
+          "remark": null,
+          "isLeaf": 1
+        },
+        "children": null
+      }
+    ]
+  }
+]

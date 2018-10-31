@@ -13,5 +13,6 @@
 <body>
 <h1>欢迎：${sessionScope.loginUser.username} 登录成功!</h1>
 <h3>恭喜：${requestScope.loginUser.username} 注册成功！</h3>
+<a href="/menuTree" target="_self">generate menu tree</a>
 </body>
 </html>

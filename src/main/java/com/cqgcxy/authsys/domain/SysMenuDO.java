@@ -2,6 +2,7 @@ package com.cqgcxy.authsys.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * sys_menu
@@ -56,6 +57,8 @@ public class SysMenuDO implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+    private List<SysMenuDO> subMenuList;
 
     private static final long serialVersionUID = 1L;
 
@@ -145,6 +148,14 @@ public class SysMenuDO implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<SysMenuDO> getSubMenuList() {
+        return subMenuList;
+    }
+
+    public void setSubMenuList(List<SysMenuDO> subMenuList) {
+        this.subMenuList = subMenuList;
     }
 
     @Override
