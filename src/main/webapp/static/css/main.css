@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+#headnav {
+	background: url("../images/header_bg.png") 0 -50px repeat-x;
+}
+
+#headnav .title {
+	color: white;
+	font-size: 33px;
+	height: 100%;
+	width: 60%;
+	line-height: 45px;
+	text-indent: 20px;
+	letter-spacing: 4px;
+	font-family: "黑体";
+	font-weight: bold;
+	display: inline-block;
+	
+}
+
+#headnav .theme {
+	height: 100%;
+	width: 39%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.theme {
+	font-size: 25px;
+	color: yellow;
+	height: 50%;
+}
+
+.theme span {
+	float: right;
+	width: 25px;
+	height: 15px;
+	display: inline-block;
+	margin-top: -5px;
+}
+
+.theme .Gray {
+	color: gray;
+}
+
+.theme .Metro {
+	color: #ddd;
+}
+
+.theme .Black {
+	color: Black;
+}
+
+.theme .Bootstrap {
+	color: #D4D4D4;
+}
+
+.theme .Material {
+	color: #eee;
+}
+
+.theme .Default {
+	color: #CCE6FF;
+}
+
+.theme div {
+	text-align: right;
+	margin-top: 15px;
+}
+
+.theme div a {
+	font-size: 14px;
+	color: white;
+}

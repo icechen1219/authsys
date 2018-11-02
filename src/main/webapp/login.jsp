@@ -82,9 +82,9 @@
     <form action="/login" method="post">
         <ul>
             <li><label for="username">用户名</label></li>
-            <li><input type="text" id="username" name="username"></li>
+            <li><input type="text" id="username" name="username" value="admin"></li>
             <li><label for="password">密码</label></li>
-            <li><input type="password" id="password" name="password"></li>
+            <li><input type="password" id="password" name="password" value="111111"></li>
             <li>
                 <button type="submit">login</button>
             </li>

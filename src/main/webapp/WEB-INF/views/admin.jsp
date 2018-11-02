@@ -11,6 +11,8 @@
     <title>基础权限管理系统</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/easyui/default/easyui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/easyui/icon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
     <script src="${pageContext.request.contextPath}/static/plugins/jquery/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/plugins/easyui/jquery.easyui.min.js"></script>
     <style>
@@ -53,13 +55,26 @@
     </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'north'" style="height:80px;text-align: right;line-height: 30px;overflow: hidden;">
-    <h1>基础权限管理系统</h1>
-    <h3>欢迎：${sessionScope.loginUser.username}</h3>
+<div id="headnav" data-options="region:'north',border:false" style="height: 50px;">
+    <div class="title">基础权限管理系统</div>
+    <div class="theme">
+        <span class="Gray" title="Gray">■</span>
+        <span class="Metro" title="Metro">■</span>
+        <span class="Black" title="Black">■</span>
+        <span class="Bootstrap" title="Bootstrap">■</span>
+        <span class="Material" title="Material">■</span>
+        <span class="Default" title="Default">■</span>
+        <div>
+            <a href='#'>| 修改密码 |</a> <a href="${pageContext.request.contextPath}/">&nbsp;&nbsp; 重新登录 &nbsp;&nbsp;| </a>
+        </div>
+    </div>
+
 </div>
-<div data-options="region:'west',split:true" title="导航栏" style="width:200px;">
+<div data-options="region:'south'" style="height: 10px;"></div>
+<div data-options="region:'west',split:true,iconCls:'icon-man'" title="当前用户:${sessionScope.loginUser.realName}"
+     style="width:200px;">
     <div class="easyui-accordion" data-options="fit:true,border:false">
-        <div class="easyui-tree" data-options="animate:true,dnd:true"></div>
+        <!--    动态添加导航树代码    -->
     </div>
 </div>
 <div data-options="region:'center'">

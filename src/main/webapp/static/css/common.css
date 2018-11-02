@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+html{ 
+      height:100%;
+    }
+body{
+     margin: 0;
+     padding: 0;
+     height:100%;
+  }
+ a{
+     text-decoration: none;
+
+ }  
+ 
+.btn-separator {  
+  vertical-align: top;
+  display: inline-block;
+  height: 24px;  
+  border-left: 1px solid LightGrey;  
+  border-right: 0px solid LightGrey;  
+  margin: 1px 1px;  
+}  
+  .radioSpan {
+      position: relative;
+      border: 1px solid #95B8E7;
+      background-color: #fff;
+      vertical-align: middle;
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0;
+      padding: 2px 0;
+      -moz-border-radius: 5px 5px 5px 5px;
+      -webkit-border-radius: 5px 5px 5px 5px;
+      border-radius: 5px 5px 5px 5px;
+      display:inline-block;
+      
+    }
+.datagrid-row{
+	height: 28px;  
+}
+/*  .tree-node,.tree-indent,.tree-title, .tree-dnd-icon{
+  height: 28px;
+  line-height:28px;
+}
+ */
+
+ 
