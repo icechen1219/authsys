@@ -15,28 +15,34 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
     <script src="${pageContext.request.contextPath}/static/plugins/jquery/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/plugins/easyui/jquery.easyui.min.js"></script>
-    <style>
-        h3, h1 {
-            margin: 5px 10px 0 0;
-            padding: 0;
-        }
-    </style>
     <script>
         $(function () {
-            $(".easyui-tree").tree({
-                url: '${pageContext.request.contextPath}/menuTree',
-                onLoadSuccess: function (node, data) {
+            $.ajax({
+                url: "/menuTree",
+                type: "get",
+                dataType: "json",
+                success:function (data) {
                     console.log(data);
+                    // $.parser.parse()
+                    data.map(function (value, index, array) {
+                        // 添加一级菜单，使用手风琴效果
+                        $("#navtree").accordion("add", {
+                            title: value.text,
+                            content: '<ul id="second-tree'+value.id+'" class="easyui-tree" data-options="animate:true,lines:false"></ul>',
+                            selected: false
+                        })
+                        // 添加二级菜单，使用默认tree效果
+                        $("#second-tree"+value.id).tree({
+                            data:value.children,
+                        })
+                    })
+                    addTreeListener();
+                    killTreeIcons();
                 },
-                onDblClick: function (node) {
-                    $(this).tree("toggle", node.target);
-                },
-                onClick: function (node) {
-                    if (node.attributes && node.attributes.url) {
-                        alert(node.attributes.url);
-                        opentabs(node.text, '${pageContext.request.contextPath}' + node.attributes.url)
-                    }
+                error:function (res) {
+                    console.log(res);
                 }
+
             })
         })
 
@@ -48,9 +54,34 @@
                     title: title,
                     href: url,
                     closable: true,
-
+                    selected: true,
                 });
             }
+        }
+        function addTreeListener() {
+            $(".easyui-tree").tree({
+                onLoadSuccess: function (node, data) {
+                    console.log(data);
+                },
+                onDblClick: function (node) {
+                    $(this).tree("toggle", node.target);
+                },
+                onClick: function (node) {
+                    if (node.attributes && node.attributes.url) {
+                        alert(node.attributes.url);
+                        opentabs(node.text, '${pageContext.request.contextPath}' + node.attributes.url)
+                    }
+                },
+                onExpand:function (node) {
+                    $('.tree-title').prev().removeClass("tree-folder-open");
+                    $('.tree-checkbox,.tree-checkbox0').prev().removeClass("tree-folder-open");
+                }
+            })
+        }
+
+        function killTreeIcons() {
+            $(".tree-icon,.tree-file").removeClass("tree-icon tree-file");
+            $(".tree-icon,.tree-folder").removeClass("tree-icon tree-folder tree-folder-open tree-folder-closed");
         }
     </script>
 </head>
@@ -73,7 +104,7 @@
 <div data-options="region:'south'" style="height: 10px;"></div>
 <div data-options="region:'west',split:true,iconCls:'icon-man'" title="当前用户:${sessionScope.loginUser.realName}"
      style="width:200px;">
-    <div class="easyui-accordion" data-options="fit:true,border:false">
+    <div id="navtree" class="easyui-accordion" data-options="fit:true,border:false">
         <!--    动态添加导航树代码    -->
     </div>
 </div>
