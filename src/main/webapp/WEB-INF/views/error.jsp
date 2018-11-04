@@ -12,5 +12,8 @@
 </head>
 <body>
 <h1>页面发生了错误，请检查后再试！</h1>
+<div>
+    ${exception.message}
+</div>
 </body>
 </html>

@@ -31,7 +31,7 @@
     <!-- 4.扫描web相关的bean -->
     <context:component-scan base-package="com.cqgcxy.authsys.web"/>
 
-    <!-- 定义文件上传解析器 -->
+    <!-- 定义文件上传解析器，使用Apache的commons-fileupload具体实现 -->
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 设定默认编码 -->
@@ -53,6 +53,17 @@
                 <value>WriteMapNullValue</value>
                 <value>QuoteFieldNames</value>
             </array>
+        </property>
+    </bean>
+
+    <!-- 配置全局异常处理，如果发生运行时异常，统一跳转到error.jsp -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.RuntimeException">
+                    error
+                </prop>
+            </props>
         </property>
     </bean>
 </beans>
