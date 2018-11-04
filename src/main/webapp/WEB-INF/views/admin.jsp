@@ -11,78 +11,21 @@
     <title>基础权限管理系统</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/easyui/default/easyui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/easyui/icon.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/videojs/video-js.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/plugins/videojs/alt/video-js-cdn.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css">
+
     <script src="${pageContext.request.contextPath}/static/plugins/jquery/jquery-1.12.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/plugins/easyui/jquery.easyui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/plugins/videojs/video.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/plugins/videojs/zh-CN.js"></script>
+    <script src="${pageContext.request.contextPath}/static/plugins/videojs/alt/video.novtt.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/main.js"></script>
     <script>
         $(function () {
-            $.ajax({
-                url: "/menuTree",
-                type: "get",
-                dataType: "json",
-                success:function (data) {
-                    console.log(data);
-                    // $.parser.parse()
-                    data.map(function (value, index, array) {
-                        // 添加一级菜单，使用手风琴效果
-                        $("#navtree").accordion("add", {
-                            title: value.text,
-                            content: '<ul id="second-tree'+value.id+'" class="easyui-tree" data-options="animate:true,lines:false"></ul>',
-                            selected: false
-                        })
-                        // 添加二级菜单，使用默认tree效果
-                        $("#second-tree"+value.id).tree({
-                            data:value.children,
-                        })
-                    })
-                    addTreeListener();
-                    killTreeIcons();
-                },
-                error:function (res) {
-                    console.log(res);
-                }
-
-            })
+            initPath('${pageContext.request.contextPath}')
         })
-
-        function opentabs(title, url) {
-            if ($('.easyui-tabs').tabs('exists', title)) {
-                $('.easyui-tabs').tabs('select', title)
-            } else {
-                $('.easyui-tabs').tabs('add', {
-                    title: title,
-                    href: url,
-                    closable: true,
-                    selected: true,
-                });
-            }
-        }
-        function addTreeListener() {
-            $(".easyui-tree").tree({
-                onLoadSuccess: function (node, data) {
-                    console.log(data);
-                },
-                onDblClick: function (node) {
-                    $(this).tree("toggle", node.target);
-                },
-                onClick: function (node) {
-                    if (node.attributes && node.attributes.url) {
-                        alert(node.attributes.url);
-                        opentabs(node.text, '${pageContext.request.contextPath}' + node.attributes.url)
-                    }
-                },
-                onExpand:function (node) {
-                    $('.tree-title').prev().removeClass("tree-folder-open");
-                    $('.tree-checkbox,.tree-checkbox0').prev().removeClass("tree-folder-open");
-                }
-            })
-        }
-
-        function killTreeIcons() {
-            $(".tree-icon,.tree-file").removeClass("tree-icon tree-file");
-            $(".tree-icon,.tree-folder").removeClass("tree-icon tree-folder tree-folder-open tree-folder-closed");
-        }
     </script>
 </head>
 <body class="easyui-layout">
