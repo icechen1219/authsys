@@ -12,8 +12,11 @@ function initPath(realPath) {
 }
 
 $.parser.onComplete = function () {
+    // 获取选中的标签页面板（tab panel）和它的标签页（tab）对象
+    var pp = $('.easyui-tabs').tabs('getSelected');
+    var activeTab = pp&&pp.panel('options').tab; // 相应的标签页（tab）对象
     var videoDiv = $(".video-js");
-    if (videoDiv.length == 1) {
+    if (videoDiv.length !=0 && activeTab&&activeTab[0].textContent=='课件学习') {
         console.log("video page loading...");
         $.getScript(contextPath + "/static/js/play.js");
     }

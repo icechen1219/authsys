@@ -79,7 +79,7 @@
 </head>
 <body>
 <div class="login">
-    <form action="/login" method="post">
+    <form action="${pageContext.request.contextPath}/login" method="post">
         <ul>
             <li><label for="username">用户名</label></li>
             <li><input type="text" id="username" name="username" value="admin"></li>
@@ -96,7 +96,7 @@
     <a href="#" id="gotoreg">还没帐号？去注册</a>
 </div>
 <div class="reg">
-    <form action="/register" method="post">
+    <form action="${pageContext.request.contextPath}/register" method="post">
         <table>
             <tr>
                 <td>用户名</td>
