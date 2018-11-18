@@ -13,7 +13,42 @@
         (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter
         (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持
     -->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <!-- jackson -->
+            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="com.fasterxml.jackson.databind.ObjectMapper">
+                        <property name="dateFormat">
+                            <bean class="java.text.SimpleDateFormat">
+                                <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm"/>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>-->
+            <!-- fastjson 避免IE出现下载JSON文件的情况 -->
+            <bean id="fastJsonHttpMessageConverter"
+                  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="features">
+                    <array>
+                        <!-- 是否输出值为null的字段 -->
+                        <value>WriteMapNullValue</value>
+                        <!-- 输出key时是否使用双引号 -->
+                        <value>QuoteFieldNames</value>
+                        <!-- Date的日期转换器，返回的日期类型默认为yyyy-MM-dd HH:mm:ss -->
+                        <value>WriteDateUseDateFormat</value>
+                    </array>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
@@ -40,22 +75,6 @@
         <property name="maxUploadSize" value="5242880"></property>
     </bean>
 
-    <!-- fastjson 避免IE出现下载JSON文件的情况 -->
-    <bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-        <property name="supportedMediaTypes">
-            <list>
-                <value>application/json;charset=UTF-8</value>
-                <value>text/html;charset=UTF-8</value>
-            </list>
-        </property>
-        <property name="features">
-            <array>
-                <value>WriteMapNullValue</value>
-                <value>QuoteFieldNames</value>
-            </array>
-        </property>
-    </bean>
-
     <!-- 配置全局异常处理，如果发生运行时异常，统一跳转到error.jsp -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
@@ -66,4 +85,6 @@
             </props>
         </property>
     </bean>
+
+
 </beans>
