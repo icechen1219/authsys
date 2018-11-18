@@ -9,7 +9,7 @@ var contextPath;
 
 $(function () {
     console.log("main.js loading...")
-})
+});
 
 function initPath(realPath) {
     contextPath = realPath;
@@ -26,12 +26,12 @@ function initPath(realPath) {
                     title: value.text,
                     content: '<ul id="second-tree' + value.id + '" class="easyui-tree" data-options="animate:true,lines:false"></ul>',
                     selected: false
-                })
+                });
                 // 添加二级菜单，使用默认tree效果
                 $("#second-tree" + value.id).tree({
-                    data: value.children,
+                    data: value.children
                 })
-            })
+            });
             addTreeListener();
             killTreeIcons();
         },
@@ -47,11 +47,11 @@ $.parser.onComplete = function () {
     var pp = $('.easyui-tabs').tabs('getSelected');
     var activeTab = pp&&pp.panel('options').tab; // 相应的标签页（tab）对象
     var videoDiv = $(".video-js");
-    if (videoDiv.length !=0 && activeTab&&activeTab[0].textContent=='课件学习') {
+    if (videoDiv.length !==0 && activeTab&&activeTab[0].textContent==='课件学习') {
         console.log("video page loading...");
         $.getScript(contextPath + "/static/js/play.js");
     }
-}
+};
 
 
 function opentabs(title, url) {
@@ -62,7 +62,7 @@ function opentabs(title, url) {
             title: title,
             href: url,
             closable: true,
-            selected: true,
+            selected: true
         });
     }
 }
@@ -103,8 +103,8 @@ function opendlg($obj, title, width, height, href, callfn) {
 
 function getDialog() {
     var $dlg = $("#ware-list #dlg");
-    console.log($dlg.length)
-    if ($dlg.length == 0) {
+    console.log($dlg.length);
+    if ($dlg.length === 0) {
         $("#ware-list").append("<div id='dlg'></div>");
         $dlg = $("#ware-list #dlg");
 

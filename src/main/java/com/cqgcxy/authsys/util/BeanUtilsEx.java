@@ -32,7 +32,7 @@ public class BeanUtilsEx {
         }
         String beanKey = generateKey(source.getClass(), target.getClass());
 
-        BeanCopier copier = null;
+        BeanCopier copier;
 
         if (!BEAN_COPIER_MAP.containsKey(beanKey)) {
             copier = BeanCopier.create(source.getClass(), target.getClass(), false);

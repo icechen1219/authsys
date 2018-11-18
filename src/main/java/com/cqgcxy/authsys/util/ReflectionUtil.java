@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * description: 反射工具类
@@ -33,11 +34,11 @@ public class ReflectionUtil {
         Field[] fields = fromClass.getDeclaredFields();
         for (Field prop : fields) {
             Method getMethod = guessGetMethod(fromClass, prop);
-            getMethod.setAccessible(true);
+            Objects.requireNonNull(getMethod).setAccessible(true);
             Object value = getMethod.invoke(from);
             if (value != null) {
                 Method setMethod = guessSetMethod(fromClass, prop);
-                setMethod.setAccessible(true);
+                Objects.requireNonNull(setMethod).setAccessible(true);
                 setMethod.invoke(to, value);
             }
 
@@ -105,9 +106,7 @@ public class ReflectionUtil {
                 Method secondMethod = entityClass.getDeclaredMethod(methodName);
                 methodMap.put(cacheKey, secondMethod);
                 return secondMethod;
-            } catch (NoSuchMethodException e1) {
-                e1.printStackTrace();
-            } catch (SecurityException e1) {
+            } catch (NoSuchMethodException | SecurityException e1) {
                 e1.printStackTrace();
             }
         } catch (SecurityException e) {
@@ -139,9 +138,7 @@ public class ReflectionUtil {
                 Method firstMethod = entityClass.getDeclaredMethod(methodName, field.getType());
                 methodMap.put(cacheKey, firstMethod);
                 return firstMethod;
-            } catch (NoSuchMethodException e1) {
-                e1.printStackTrace();
-            } catch (SecurityException e1) {
+            } catch (NoSuchMethodException | SecurityException e1) {
                 e1.printStackTrace();
             }
         } catch (SecurityException e) {

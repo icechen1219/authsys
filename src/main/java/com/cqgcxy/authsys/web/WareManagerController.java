@@ -64,7 +64,7 @@ public class WareManagerController {
             logger.debug("upload filename===========>" + newName);
             File targetFile = new File(uploadPath, newName);
             // 确保文件上传的各级文件夹已存在
-            targetFile.mkdirs();
+            boolean exist = targetFile.mkdirs();
             try {
                 warefile.transferTo(targetFile);
             } catch (IOException e) {

@@ -6,12 +6,12 @@
   To change this template use File | Settings | File Templates.
 */
 $(function () {
-    console.log("ware.js loaded...")
+    console.log("ware.js loaded...");
     var dialog = getDialog();
     opendlg(dialog, '新增课件', "380", "350", contextPath+'/addWare', function () {
         uploadConfirm(dialog);
     });
-})
+});
 
 function uploadConfirm($dlg) {
     var form = new FormData($('form')[0]);

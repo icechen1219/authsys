@@ -14,7 +14,7 @@
         (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持
     -->
     <mvc:annotation-driven>
-        <mvc:message-converters register-defaults="true">
+        <mvc:message-converters>
             <!-- jackson -->
             <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
@@ -28,27 +28,31 @@
                 </property>
             </bean>-->
             <!-- fastjson 避免IE出现下载JSON文件的情况 -->
-            <bean id="fastJsonHttpMessageConverter"
-                  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
                         <value>application/json;charset=UTF-8</value>
                         <value>text/html;charset=UTF-8</value>
                     </list>
                 </property>
-                <property name="features">
-                    <array>
-                        <!-- 是否输出值为null的字段 -->
-                        <value>WriteMapNullValue</value>
-                        <!-- 输出key时是否使用双引号 -->
-                        <value>QuoteFieldNames</value>
-                        <!-- Date的日期转换器，返回的日期类型默认为yyyy-MM-dd HH:mm:ss -->
-                        <value>WriteDateUseDateFormat</value>
-                    </array>
-                </property>
+                <property name="fastJsonConfig" ref="fastJsonConfig"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+
+    <bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        <!--   FastJson自定义配置...   -->
+        <property name="serializerFeatures">
+            <array>
+                <!-- 是否输出值为null的字段 -->
+                <value>WriteMapNullValue</value>
+                <!-- 输出key时是否使用双引号 -->
+                <value>QuoteFieldNames</value>
+                <!-- Date的日期转换器，返回的日期类型默认为yyyy-MM-dd HH:mm:ss -->
+                <value>WriteDateUseDateFormat</value>
+            </array>
+        </property>
+    </bean>
 
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
@@ -70,9 +74,9 @@
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 设定默认编码 -->
-        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="defaultEncoding" value="UTF-8"/>
         <!-- 设定文件上传的最大值5MB，5*1024*1024 -->
-        <property name="maxUploadSize" value="5242880"></property>
+        <property name="maxUploadSize" value="5242880"/>
     </bean>
 
     <!-- 配置全局异常处理，如果发生运行时异常，统一跳转到error.jsp -->
@@ -85,6 +89,4 @@
             </props>
         </property>
     </bean>
-
-
 </beans>

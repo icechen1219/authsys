@@ -9,7 +9,7 @@ var player;
 $(function () {
     console.log("play.js loaded...");
     reloadVideo();
-})
+});
 
 function reloadVideo() {
     // 为了避免反复打开标签页导致videojs对象重复创建，所以先销毁它
@@ -43,13 +43,13 @@ function reloadVideo() {
         disableProgress();
         console.log('Good to go!');
         // player.play(); // 交给autoplay控制
-        console.log("你已学习完：" + (localStorage.getItem("finishCount") || 0) + "次本视频。")
+        console.log("你已学习完：" + (localStorage.getItem("finishCount") || 0) + "次本视频。");
 
         // 监听帧更新事件，注意一定要放到ready事件中，否则在视频尚未加载完毕的时候也会触发该事件，导致获取当前时间始终为0
         player.on('timeupdate', function () {
             var lastpos = localStorage.getItem("lastpos") || 0;
             if (player.currentTime() - parseFloat(lastpos) > 1) {
-                console.log('快进了，退回去...')
+                console.log('快进了，退回去...');
                 player.currentTime(parseFloat(lastpos));
             } else{
                 localStorage.setItem("lastpos", player.currentTime());
@@ -89,7 +89,7 @@ function reloadVideo() {
  */
 window.onunload = function () {
     localStorage.setItem("lastpos", player.currentTime());
-}
+};
 
 /**
  * 禁用videojs的进度条点击事件
