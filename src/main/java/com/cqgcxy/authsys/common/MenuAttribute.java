@@ -1,5 +1,7 @@
 package com.cqgcxy.authsys.common;
 
+import java.util.Date;
+
 /**
  * @author icechen1219
  * @date 2018/10/31
@@ -49,6 +51,10 @@ public class MenuAttribute {
      * 0-否，1-是
      */
     private int isLeaf;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public Integer getMenuId() {
         return menuId;
@@ -120,5 +126,21 @@ public class MenuAttribute {
 
     public void setIsLeaf(int isLeaf) {
         this.isLeaf = isLeaf;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

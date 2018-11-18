@@ -1,7 +1,6 @@
 ///:ReflectionUtil.java
 package com.cqgcxy.authsys.util;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -87,7 +86,7 @@ public class ReflectionUtil {
     public static Method guessGetMethod(Class<?> entityClass, Field field) {
         String cacheKey = entityClass.getSimpleName() + "get" + field.getName();
         Method cacheMethod = methodMap.get(cacheKey);
-        if (cacheMethod !=null){
+        if (cacheMethod != null) {
             return cacheMethod;
         }
         String prefix = "get";
@@ -127,7 +126,7 @@ public class ReflectionUtil {
     public static Method guessSetMethod(Class<?> entityClass, Field field) {
         String cacheKey = entityClass.getSimpleName() + "set" + field.getName();
         Method cacheMethod = methodMap.get(cacheKey);
-        if (cacheMethod !=null){
+        if (cacheMethod != null) {
             return cacheMethod;
         }
         String methodName = "set" + StringUtil.upperFirstChar(field.getName());

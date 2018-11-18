@@ -41,11 +41,7 @@ public class EasyUiUtil {
         menu1.setText(sysMenu.getMenuName());
         menu1.setIconCls(sysMenu.getIcon());
         MenuAttribute attributes = new MenuAttribute();
-        try {
-            ReflectionUtil.simpleClonePojo(sysMenu, attributes);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        BeanUtilsEx.copyProperties(sysMenu,attributes);
         menu1.setAttributes(attributes);
         if (sysMenu.getSubMenuList().size() != 0) {
             menu1.setChildren(fechChildrenMenu(sysMenu.getSubMenuList()));
